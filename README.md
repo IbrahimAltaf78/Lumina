@@ -50,7 +50,8 @@ middle, input at the bottom of the chat panel. Lumina breaks that pattern.
 
 **Command Deck** is Lumina's interface concept:
 
-- **No sidebar** — conversation history lives in a slide-over overlay,
+- **Collapsible sidebar** — recent chats always visible, collapses 
+  to icon-only mode with one click to reclaim screen space,
   keeping the main canvas completely distraction-free
 - **Full-width dark canvas** — the chat area breathes, messages have
   space, nothing feels cramped
