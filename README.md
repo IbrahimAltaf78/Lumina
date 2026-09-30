@@ -118,8 +118,9 @@ with vivid violet, hot pink, and electric cyan accents.
 ---
 
 ## Project Structure
+```
 lumina/
-├── client/ # React frontend (Vite)
+├── client/ # React frontend
 │ └── src/
 │ ├── components/
 │ │ ├── Auth/ # Login, Register
@@ -137,8 +138,8 @@ lumina/
 ├── routes/
 ├── models/ # User, Conversation, Message
 ├── middleware/
-└── config/ # DB, AI client
-
+└── config/ # DB and AI client
+```
 ---
 
 ## Getting Started
