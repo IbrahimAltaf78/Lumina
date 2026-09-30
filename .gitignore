@@ -1,0 +1,30 @@
+# ── Dependencies ──────────────────────
+node_modules/
+
+# ── Environment Variables (NEVER commit these) ──
+.env
+.env.local
+.env.development
+.env.production
+
+# ── Build Outputs ─────────────────────
+dist/
+build/
+client/dist/
+
+# ── Logs ──────────────────────────────
+logs/
+*.log
+npm-debug.log*
+
+# ── OS Files ──────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Editor Files ──────────────────────
+.vscode/
+.idea/
+*.suo
+
+# ── Uploads (local files) ─────────────
+server/uploads/
