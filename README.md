@@ -186,4 +186,4 @@ Full-Stack Developer &nbsp;·&nbsp; BS Cybersecurity, UMT Lahore
 
 ---
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:F472B6,50:A855F7,100:070312&height=130&section=footer&text=Built%20with%20intention.%20Designed%20to%20be%20different.&fontSize=16&fontColor=ffffff&fontAlignY=65&animation=fadeIn"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=shark&color=A855F7&height=150&section=footer&text=Built%20with%20intention.%20Designed%20to%20be%20different.&fontSize=16&fontColor=ffffff&fontAlignY=40&animation=fadeIn"/>
