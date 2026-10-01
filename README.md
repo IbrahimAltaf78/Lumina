@@ -1,4 +1,4 @@
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:070312,50:A855F7,100:F472B6&height=220&section=header&text=%E2%9C%A6%20Lumina&fontSize=90&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=AI%20Assistant%20%C2%B7%20Command%20Deck%20Interface%20%C2%B7%20Nebula%20Theme&descAlignY=62&descSize=18&descColor=E9D5FF"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=shark&color=A855F7&height=200&section=header&text=%E2%9C%A6%20Lumina&fontSize=90&fontColor=ffffff&animation=fadeIn&fontAlignY=60&desc=AI%20Assistant%20%C2%B7%20Command%20Deck%20%C2%B7%20Nebula%20Theme&descAlignY=80&descSize=18&descColor=E9D5FF"/>
 
 <div align="center">
 
