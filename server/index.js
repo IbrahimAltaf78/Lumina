@@ -15,6 +15,9 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(helmet());
 app.use(morgan("dev"));
 
+// ── Routes ──────────────────────────────────────
+app.use("/api/auth", require("./routes/auth"));
+
 // ── Health check ────────────────────────────────
 app.get("/", (req, res) => {
   res.json({ message: "✦ Lumina API is running" });
