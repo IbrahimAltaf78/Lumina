@@ -16,7 +16,8 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 // ── Routes ──────────────────────────────────────
-app.use("/api/auth", require("./routes/auth"));
+app.use("/api/auth",          require("./routes/auth"));
+app.use("/api/conversations", require("./routes/conversation"));
 
 // ── Health check ────────────────────────────────
 app.get("/", (req, res) => {
