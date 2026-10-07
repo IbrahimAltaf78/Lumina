@@ -18,6 +18,7 @@ app.use(morgan("dev"));
 // ── Routes ──────────────────────────────────────
 app.use("/api/auth",          require("./routes/auth"));
 app.use("/api/conversations", require("./routes/conversation"));
+app.use("/api/ai",            require("./routes/ai"));
 
 // ── Health check ────────────────────────────────
 app.get("/", (req, res) => {
