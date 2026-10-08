@@ -11,7 +11,7 @@ export default function ChatPage() {
   const [activeId,      setActiveId]      = useState(null)
   const [messages,      setMessages]      = useState([])
   const [loading,       setLoading]       = useState(false)
-  const [model,         setModel]         = useState("claude-sonnet-4-6")
+  const [model,         setModel]         = useState("openai/gpt-oss-20b")
   const bottomRef = useRef(null)
 
   useEffect(() => {
@@ -32,10 +32,28 @@ export default function ChatPage() {
 
   const handleNew = () => { setActiveId(null); setMessages([]) }
 
-  const handleSend = async (text) => {
+  const handleDelete = (id) => {
+    setConversations(prev => prev.filter(c => c._id !== id))
+    if (activeId === id) { setActiveId(null); setMessages([]) }
+  }
+
+  const handleExport = () => {
+    if (!messages.length) return
+    const text = messages.map(m => `${m.role === "user" ? "You" : "Lumina"}: ${m.content}`).join("\n\n")
+    const blob = new Blob([text], { type: "text/plain" })
+    const url  = URL.createObjectURL(blob)
+    const a    = document.createElement("a")
+    a.href = url
+    a.download = "lumina-chat.txt"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const sendMessage = async (text, historyOverride) => {
     setLoading(true)
-    const userMsg    = { role: "user", content: text, _id: Date.now() }
-    const newMessages = [...messages, userMsg]
+    const history = historyOverride || messages
+    const userMsg = { role: "user", content: text, _id: Date.now() }
+    const newMessages = [...history, userMsg]
     setMessages(newMessages)
 
     try {
@@ -85,11 +103,35 @@ export default function ChatPage() {
     finally { setLoading(false) }
   }
 
+  const handleSend = (text) => sendMessage(text)
+
+  const handleRegenerate = () => {
+    const lastUser = [...messages].reverse().find(m => m.role === "user")
+    if (!lastUser) return
+    const history = messages.slice(0, messages.lastIndexOf(messages.find(m => m === lastUser)))
+    setMessages(messages.filter(m => m.role !== "assistant" || messages.indexOf(m) !== messages.length - 1))
+    sendMessage(lastUser.content, messages.filter((_, i) => i < messages.findLastIndex(m => m.role === "user")))
+  }
+
   return (
     <div className="flex h-screen bg-nebula-bg overflow-hidden">
-      <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} conversations={conversations} activeId={activeId} onSelect={handleSelect} onNew={handleNew} />
+      <Sidebar
+        collapsed={collapsed}
+        onToggle={() => setCollapsed(!collapsed)}
+        conversations={conversations}
+        activeId={activeId}
+        onSelect={handleSelect}
+        onNew={handleNew}
+        onDelete={handleDelete}
+      />
       <div className="flex flex-col flex-1 min-w-0">
-        <Navbar onToggleSidebar={() => setCollapsed(!collapsed)} model={model} onModelChange={setModel} />
+        <Navbar
+          onToggleSidebar={() => setCollapsed(!collapsed)}
+          model={model}
+          onModelChange={setModel}
+          onExport={handleExport}
+          hasMessages={messages.length > 0}
+        />
         <div className="flex-1 overflow-y-auto px-6 py-6">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
@@ -97,7 +139,14 @@ export default function ChatPage() {
               <h2 className="text-2xl font-bold text-nebula-primary mb-2">Lumina</h2>
               <p className="text-nebula-muted text-sm">Start a conversation below.</p>
             </div>
-          ) : messages.map(m => <MessageBubble key={m._id} message={m} />)}
+          ) : messages.map((m, i) => (
+            <MessageBubble
+              key={m._id}
+              message={m}
+              isLast={i === messages.length - 1}
+              onRegenerate={i === messages.length - 1 ? handleRegenerate : null}
+            />
+          ))}
           {loading && messages[messages.length - 1]?.content === "" && (
             <div className="flex gap-3 mb-5">
               <div className="w-7 h-7 rounded-lg bg-nebula-primary flex items-center justify-center text-white text-xs">✦</div>

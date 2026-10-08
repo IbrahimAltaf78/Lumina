@@ -1,21 +1,16 @@
-export default function Navbar({ onToggleSidebar, model, onModelChange }) {
+export default function Navbar({ onToggleSidebar, model, onModelChange, onExport, hasMessages }) {
   const models = [
-    { id: "claude-sonnet-4-6", label: "Claude Sonnet" },
-    { id: "gpt-4o",            label: "GPT-4o"        },
+    { id: "openai/gpt-oss-20b",  label: "GPT-OSS 20B" },
+    { id: "openai/gpt-oss-120b", label: "GPT-OSS 120B" },
   ]
 
   return (
     <div className="h-14 bg-nebula-surface border-b border-nebula-border flex items-center justify-between px-4 flex-shrink-0">
-
-      {/* Left — sidebar toggle */}
       <button
         onClick={onToggleSidebar}
         className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2"
-      >
-        ☰
-      </button>
+      >☰</button>
 
-      {/* Center — model selector */}
       <div className="flex items-center gap-2 bg-nebula-surface2 border border-nebula-border rounded-lg px-3 py-1.5">
         <span className="w-2 h-2 rounded-full bg-nebula-green flex-shrink-0"></span>
         <select
@@ -29,11 +24,16 @@ export default function Navbar({ onToggleSidebar, model, onModelChange }) {
         </select>
       </div>
 
-      {/* Right — icons */}
       <div className="flex items-center gap-1">
+        {hasMessages && (
+          <button
+            onClick={onExport}
+            className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2 text-xs font-mono"
+            title="Export chat"
+          >↓ export</button>
+        )}
         <button className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2 text-sm">⚙</button>
       </div>
-
     </div>
   )
 }
