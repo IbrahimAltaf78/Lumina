@@ -69,7 +69,7 @@ export default function ChatPage() {
       setMessages(prev => [...prev, { role: "assistant", content: "", _id: aiId }])
 
       const token    = localStorage.getItem("lumina_token")
-      const response = await fetch("http://localhost:5000/api/ai/chat", {
+      const response = await fetch("https://lumina-production-ccb1.up.railway.app/api/ai/chat", {
         method:  "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body:    JSON.stringify({
