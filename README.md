@@ -12,6 +12,7 @@
 ![Version](https://img.shields.io/badge/Version-0.1.0-22D3EE?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-4ADE80?style=for-the-badge)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-F472B6?style=for-the-badge)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-lumina--eight--roan.vercel.app-A855F7?style=for-the-badge)](https://lumina-eight-roan.vercel.app)
 
 </div>
 
@@ -93,7 +94,7 @@ Lumina is a full-stack AI chat application built from the ground up. It supports
 | Styling | Tailwind CSS |
 | Backend | Node.js + Express |
 | Database | MongoDB Atlas |
-| AI Engine | Claude API / OpenAI API |
+| AI Engine | Groq API (LLaMA) + Web Search |
 | Auth | JWT + bcrypt |
 | Streaming | Server-Sent Events (SSE) |
 | Deployment | Vercel · Railway |
@@ -124,6 +125,7 @@ lumina/
 ├── models/ # User, Conversation, Message
 ├── middleware/
 └── config/ # DB and AI client
+
 ````
 
 ---
@@ -159,14 +161,14 @@ cd ../client && npm run dev
 - [x] Project setup and folder structure
 - [x] Interface design — Command Deck + collapsible sidebar
 - [x] Design system — Nebula color scheme
-- [x] Express server running on port 5000
-- [x] MongoDB Atlas connected — lumina-cluster
+- [x] Express server + MongoDB Atlas connected
 - [x] Database models — User, Conversation, Message
-- [ ] Auth system — register, login, JWT middleware
-- [ ] Frontend — core UI, Nebula theme, auth pages
-- [ ] AI integration — Claude API + streaming
-- [ ] Advanced features — upload, search, export
-- [ ] Deploy to Vercel + Railway
+- [x] Auth system — register, login, JWT middleware
+- [x] Frontend — core UI, Nebula theme, auth pages
+- [x] AI integration — Groq API + streaming
+- [x] Real-time web search via Tavily
+- [x] Advanced features — search, export, regenerate, copy
+- [x] Deploy to Vercel + Railway
 
 ---
 
@@ -181,6 +183,7 @@ Full-Stack Developer &nbsp;·&nbsp; BS Cybersecurity, UMT Lahore
 <br/>
 
 [![GitHub](https://img.shields.io/badge/GitHub-IbrahimAltaf78-A855F7?style=for-the-badge&logo=github&logoColor=white)](https://github.com/IbrahimAltaf78)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Lumina-4ADE80?style=for-the-badge)](https://lumina-eight-roan.vercel.app)
 
 </div>
 
