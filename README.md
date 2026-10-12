@@ -20,7 +20,7 @@
 
 ## ✦ What is Lumina?
 
-Lumina is a full-stack AI chat application built from the ground up. It supports real-time streaming responses, conversation history, markdown rendering, code highlighting, and multi-model AI — all wrapped in a **completely original interface** that looks nothing like ChatGPT, Claude, or Gemini.
+Lumina is a full-stack AI chat application built from the ground up. It supports real-time streaming responses, conversation history, markdown rendering, code highlighting, and multi-model AI — all wrapped in a **completely original interface** that looks nothing like ChatGPT or Claude.
 
 ---
 
