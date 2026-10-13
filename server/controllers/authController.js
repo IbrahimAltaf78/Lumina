@@ -71,4 +71,49 @@ const getMe = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getMe };
+// ── Update profile ────────────────────────
+const updateProfile = async (req, res, next) => {
+  try {
+    const { name, currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.user._id);
+
+    if (name) user.name = name;
+
+    if (currentPassword && newPassword) {
+      const match = await user.comparePassword(currentPassword);
+      if (!match) {
+        return res.status(400).json({ error: "Current password is incorrect" });
+      }
+      if (newPassword.length < 6) {
+        return res.status(400).json({ error: "Password must be at least 6 characters" });
+      }
+      user.password = newPassword;
+    }
+
+    await user.save();
+    res.json({ message: "Profile updated", name: user.name });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// ── Delete account ────────────────────────
+const deleteAccount = async (req, res, next) => {
+  try {
+    const Conversation = require("../models/Conversation");
+    const Message      = require("../models/Message");
+
+    const convos = await Conversation.find({ user: req.user._id });
+    for (const c of convos) {
+      await Message.deleteMany({ conversation: c._id });
+    }
+    await Conversation.deleteMany({ user: req.user._id });
+    await User.findByIdAndDelete(req.user._id);
+
+    res.json({ message: "Account deleted successfully" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { register, login, getMe, updateProfile, deleteAccount };

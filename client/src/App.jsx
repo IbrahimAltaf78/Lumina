@@ -1,7 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { useAuth } from "./context/AuthContext"
-import LoginPage from "./pages/LoginPage"
-import ChatPage  from "./pages/ChatPage"
+import LoginPage    from "./pages/LoginPage"
+import ChatPage     from "./pages/ChatPage"
+import SettingsPage from "./pages/SettingsPage"
 
 function App() {
   const { user, loading } = useAuth()
@@ -14,9 +15,10 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/chat" />} />
-      <Route path="/chat"  element={user  ? <ChatPage />  : <Navigate to="/login" />} />
-      <Route path="*"      element={<Navigate to={user ? "/chat" : "/login"} />} />
+      <Route path="/login"    element={!user ? <LoginPage />    : <Navigate to="/chat" />} />
+      <Route path="/chat"     element={user  ? <ChatPage />     : <Navigate to="/login" />} />
+      <Route path="/settings" element={user  ? <SettingsPage /> : <Navigate to="/login" />} />
+      <Route path="*"         element={<Navigate to={user ? "/chat" : "/login"} />} />
     </Routes>
   )
 }

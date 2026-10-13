@@ -1,4 +1,10 @@
+import { useTheme } from "../../context/ThemeContext"
+import { useNavigate } from "react-router-dom"
+
 export default function Navbar({ onToggleSidebar, model, onModelChange, onExport, hasMessages }) {
+  const { theme, toggleTheme } = useTheme()
+  const navigate = useNavigate()
+
   const models = [
     { id: "openai/gpt-oss-20b",  label: "GPT-OSS 20B" },
     { id: "openai/gpt-oss-120b", label: "GPT-OSS 120B" },
@@ -29,10 +35,16 @@ export default function Navbar({ onToggleSidebar, model, onModelChange, onExport
           <button
             onClick={onExport}
             className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2 text-xs font-mono"
-            title="Export chat"
           >↓ export</button>
         )}
-        <button className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2 text-sm">⚙</button>
+        <button
+          onClick={toggleTheme}
+          className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2 text-sm"
+        >{theme === "dark" ? "☀️" : "🌙"}</button>
+        <button
+          onClick={() => navigate("/settings")}
+          className="text-nebula-muted hover:text-nebula-dim transition-colors p-2 rounded-lg hover:bg-nebula-surface2 text-sm"
+        >⚙</button>
       </div>
     </div>
   )
