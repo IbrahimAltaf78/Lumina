@@ -25,7 +25,16 @@ export default function MessageBubble({ message, isLast, onRegenerate }) {
             : "bg-nebula-primary/10 border border-nebula-primary/20 text-nebula-dim rounded-tl-sm"
         }`}>
           {isUser ? (
-            <p className="whitespace-pre-wrap">{message.content}</p>
+            <div className="whitespace-pre-wrap">
+              {message.image && (
+                <img
+                  src={message.image}
+                  alt="uploaded"
+                  className="max-w-xs rounded-xl mb-2 border border-white/20"
+                />
+              )}
+              {message.content && <p>{message.content}</p>}
+            </div>
           ) : (
             <ReactMarkdown components={{
               code({ node, inline, className, children, ...props }) {

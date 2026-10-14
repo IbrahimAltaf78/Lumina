@@ -52,7 +52,7 @@ export default function ChatPage() {
   const sendMessage = async (text, historyOverride) => {
     setLoading(true)
     const history = historyOverride || messages
-    const userMsg = { role: "user", content: text, _id: Date.now() }
+   const userMsg = { role: "user", content: text, image: image || null, _id: Date.now() }
     const newMessages = [...history, userMsg]
     setMessages(newMessages)
 
@@ -74,7 +74,15 @@ export default function ChatPage() {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body:    JSON.stringify({
           conversationId: convoId,
-          messages: newMessages.map(m => ({ role: m.role, content: m.content })),
+         messages: newMessages.map(m => ({
+  role: m.role,
+  content: m.image
+    ? [
+        { type: "image_url", image_url: { url: m.image } },
+        { type: "text", text: m.content || "What is in this image?" }
+      ]
+    : m.content
+})),
           model
         })
       })
@@ -103,7 +111,7 @@ export default function ChatPage() {
     finally { setLoading(false) }
   }
 
-  const handleSend = (text) => sendMessage(text)
+  const handleSend = (text, image) => sendMessage(text, image)
 
   const handleRegenerate = () => {
     const lastUser = [...messages].reverse().find(m => m.role === "user")
