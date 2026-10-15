@@ -18,7 +18,7 @@ export default function MessageBubble({ message, isLast, onRegenerate }) {
       {!isUser && (
         <div className="w-7 h-7 rounded-lg bg-nebula-primary flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-1">✦</div>
       )}
-      <div className="max-w-[75%]">
+      <div className="max-w-[85%] md:max-w-[75%]">
         <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
           isUser
             ? "bg-nebula-primary text-white rounded-tr-sm"

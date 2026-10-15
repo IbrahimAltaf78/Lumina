@@ -6,7 +6,7 @@ import CommandInput  from "../components/Chat/CommandInput"
 import api           from "../services/api"
 
 export default function ChatPage() {
-  const [collapsed,     setCollapsed]     = useState(false)
+ const [collapsed, setCollapsed] = useState(window.innerWidth < 768)
   const [conversations, setConversations] = useState([])
   const [activeId,      setActiveId]      = useState(null)
   const [messages,      setMessages]      = useState([])
@@ -140,7 +140,7 @@ export default function ChatPage() {
           onExport={handleExport}
           hasMessages={messages.length > 0}
         />
-        <div className="flex-1 overflow-y-auto px-6 py-6">
+        <div className="flex-1 overflow-y-auto px-3 md:px-6 py-4 md:py-6">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <p className="text-5xl mb-4">✦</p>
