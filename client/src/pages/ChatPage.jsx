@@ -49,7 +49,7 @@ export default function ChatPage() {
     URL.revokeObjectURL(url)
   }
 
-  const sendMessage = async (text, historyOverride) => {
+ const sendMessage = async (text, image = null, historyOverride = null) => {
     setLoading(true)
     const history = historyOverride || messages
    const userMsg = { role: "user", content: text, image: image || null, _id: Date.now() }
@@ -118,7 +118,11 @@ export default function ChatPage() {
     if (!lastUser) return
     const history = messages.slice(0, messages.lastIndexOf(messages.find(m => m === lastUser)))
     setMessages(messages.filter(m => m.role !== "assistant" || messages.indexOf(m) !== messages.length - 1))
-    sendMessage(lastUser.content, messages.filter((_, i) => i < messages.findLastIndex(m => m.role === "user")))
+   sendMessage(
+  lastUser.content,
+  lastUser.image || null,
+  messages.filter((_, i) => i < messages.findLastIndex(m => m.role === "user"))
+)
   }
 
   return (
