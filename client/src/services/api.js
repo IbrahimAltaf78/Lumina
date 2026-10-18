@@ -12,4 +12,22 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+api.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    const status = err.response?.status;
+    const url = err.config?.url || "";
+    const isAuthRoute = url.includes("/auth/login") || url.includes("/auth/register");
+
+    if (status === 401 && !isAuthRoute) {
+      localStorage.removeItem("lumina_token");
+      localStorage.removeItem("lumina_user");
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(err);
+  }
+);
+
 export default api;

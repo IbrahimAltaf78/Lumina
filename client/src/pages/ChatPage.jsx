@@ -86,7 +86,13 @@ export default function ChatPage() {
           model
         })
       })
-
+      
+         if (response.status === 401) {
+     localStorage.removeItem("lumina_token")
+     localStorage.removeItem("lumina_user")
+     window.location.href = "/login"
+     return
+   }
       const reader  = response.body.getReader()
       const decoder = new TextDecoder()
 
