@@ -93,6 +93,10 @@ export default function ChatPage() {
      window.location.href = "/login"
      return
    }
+   if (response.status === 429) {
+  setMessages(prev => prev.map(m => m._id === aiId ? { ...m, content: "You're sending messages too quickly. Please wait a few minutes and try again." } : m))
+  return
+}
       const reader  = response.body.getReader()
       const decoder = new TextDecoder()
 
