@@ -12,14 +12,22 @@ const protect = async (req, res, next) => {
     return res.status(401).json({ error: "Not authorized — no token" });
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  req.user = await User.findById(decoded.id).select("-password");
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select("-password");
 
-  if (!req.user) {
-    return res.status(401).json({ error: "User no longer exists" });
+    if (!req.user) {
+      return res.status(401).json({ error: "User no longer exists" });
+    }
+
+    next();
+  } catch (err) {
+    if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {
+      return res.status(401).json({ error: "Not authorized — invalid or expired token" });
+    }
+    console.error("Auth middleware error:", err);
+    return res.status(500).json({ error: "Server error" });
   }
-
-  next();
 };
 
 module.exports = { protect };
