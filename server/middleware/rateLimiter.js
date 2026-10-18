@@ -8,4 +8,12 @@ const authLimiter = rateLimit({
   message: { error: "Too many attempts. Please try again in 15 minutes." },
 })
 
-module.exports = { authLimiter }
+const aiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many messages. Please wait a few minutes and try again." },
+})
+
+module.exports = { authLimiter, aiLimiter }
