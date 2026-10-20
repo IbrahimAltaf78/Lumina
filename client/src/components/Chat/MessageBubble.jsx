@@ -66,7 +66,7 @@ export default function MessageBubble({ message, isLast, onRegenerate }) {
               th: ({ children }) => <th className="border border-nebula-border px-3 py-2 text-left font-semibold text-nebula-text bg-nebula-surface2">{children}</th>,
               td: ({ children }) => <td className="border border-nebula-border px-3 py-2 align-top">{children}</td>,
             }}>
-              {message.content}
+              {message.content.replace(/<br\s*\/?>/gi, " ")}
             </ReactMarkdown>
           )}
         </div>
