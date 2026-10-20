@@ -1,5 +1,6 @@
 import { useState } from "react"
 import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
 
@@ -36,7 +37,8 @@ export default function MessageBubble({ message, isLast, onRegenerate }) {
               {message.content && <p>{message.content}</p>}
             </div>
           ) : (
-            <ReactMarkdown components={{
+          
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
               code({ node, inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "")
                 return !inline && match ? (
@@ -60,6 +62,9 @@ export default function MessageBubble({ message, isLast, onRegenerate }) {
               h1: ({ children }) => <h1 className="text-lg font-bold text-nebula-text mb-2">{children}</h1>,
               h2: ({ children }) => <h2 className="text-base font-bold text-nebula-text mb-2">{children}</h2>,
               h3: ({ children }) => <h3 className="text-sm font-bold text-nebula-text mb-1">{children}</h3>,
+              table: ({ children }) => <div className="overflow-x-auto my-2"><table className="min-w-full border-collapse text-xs">{children}</table></div>,
+              th: ({ children }) => <th className="border border-nebula-border px-3 py-2 text-left font-semibold text-nebula-text bg-nebula-surface2">{children}</th>,
+              td: ({ children }) => <td className="border border-nebula-border px-3 py-2 align-top">{children}</td>,
             }}>
               {message.content}
             </ReactMarkdown>
