@@ -1,7 +1,0 @@
-What	Status
-React + Vite initialized	✅
-Tailwind + Nebula theme	✅
-AuthContext + API service	✅
-Login / Register page	✅
-Protected routing	✅
-End-to-end auth working	✅
