@@ -60,7 +60,13 @@ const needsWebSearch = (text) => {
   ];
   return keywords.some(k => text.toLowerCase().includes(k));
 };
-
+   // ── Get plain text from a message (text, or text + image) ──
+   const getText = (content) => {
+     if (Array.isArray(content)) {
+       return content.filter(p => p.type === "text").map(p => p.text).join(" ")
+     }
+     return content || ""
+   }
 const chat = async (req, res, next) => {
   try {
     const { conversationId, messages } = req.body;
@@ -72,14 +78,14 @@ const chat = async (req, res, next) => {
     const userMsg = await Message.create({
       conversation: conversationId,
       role:    "user",
-      content: messages[messages.length - 1].content
+          content: getText(messages[messages.length - 1].content)
     });
     await Conversation.findByIdAndUpdate(conversationId, {
       $push: { messages: userMsg._id },
       updatedAt: new Date()
     });
 
-    const lastMessage = messages[messages.length - 1].content;
+       const lastMessage = getText(messages[messages.length - 1].content);
     const today = new Date().toLocaleDateString("en-US", {
       weekday: "long", year: "numeric", month: "long", day: "numeric"
     });
@@ -114,16 +120,22 @@ ${searchResults}
 Now answer the user's question using ONLY the live search results above.
 Do not use your training data for facts — the search results are more current and accurate.`;
     }
-
+    const lastMsg  = messages[messages.length - 1]
+    const hasImage = Array.isArray(lastMsg.content) && lastMsg.content.some(p => p.type === "image_url")
+    const chatModel = hasImage ? "qwen/qwen3.8-27b" : "openai/gpt-oss-20b"
     let fullText = "";
 
     const stream = await groq.chat.completions.create({
-      model:       "openai/gpt-oss-20b",
+      model:       chatModel,
       stream:      true,
       temperature: 0.3,
+             max_tokens:  hasImage ? 800 : undefined,
       messages: [
         { role: "system", content: systemPrompt },
-        ...messages.map(m => ({ role: m.role, content: m.content }))
+                   ...messages.map((m, i) => ({
+             role: m.role,
+             content: i === messages.length - 1 && hasImage ? m.content : getText(m.content)
+           }))
       ]
     });
 

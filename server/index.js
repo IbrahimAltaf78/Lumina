@@ -10,6 +10,7 @@ require("dotenv").config();
    app.set("trust proxy", 1);
 
 // ── Middleware ──────────────────────────────────
+app.use("/api/ai", express.json({ limit: "8mb" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
