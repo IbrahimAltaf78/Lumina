@@ -8,7 +8,7 @@
 
 <br/><br/>
 
-![Status](https://img.shields.io/badge/Status-In%20Development-A855F7?style=for-the-badge&logo=statuspage&logoColor=white)
+   ![Status](https://img.shields.io/badge/Status-Live-4ADE80?style=for-the-badge&logo=statuspage&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-0.1.0-22D3EE?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-4ADE80?style=for-the-badge)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-F472B6?style=for-the-badge)
@@ -70,11 +70,11 @@ Lumina is a full-stack AI chat application built from the ground. It supports re
 |---|---|
 | ✦ User auth — register, login, JWT | ✦ Image upload support |
 | ✦ Real-time streaming via SSE | ✦ Search past conversations |
-| ✦ Full conversation history | ✦ Export as `.txt` or `.md` |
+| ✦ Full conversation history | ✦ Export as `.txt` |
 | ✦ Markdown rendering | ✦ Multiple AI model selector |
 | ✦ Code highlighting + copy button | ✦ Regenerate response |
 | ✦ Collapsible sidebar | ✦ Dark / Light theme toggle |
-| ✦ Fully responsive design | ✦ Conversation pinning |
+| ✦ Fully responsive design | ✦ Real-time web search |
 
 </div>
 
@@ -94,7 +94,7 @@ Lumina is a full-stack AI chat application built from the ground. It supports re
 | Styling | Tailwind CSS |
 | Backend | Node.js + Express |
 | Database | MongoDB Atlas |
-| AI Engine | Groq API (LLaMA) + Web Search |
+| AI Engine | Groq API (GPT-OSS) + Tavily Web Search |
 | Auth | JWT + bcrypt |
 | Streaming | Server-Sent Events (SSE) |
 | Deployment | Vercel · Railway |
@@ -137,9 +137,9 @@ lumina/
 git clone https://github.com/IbrahimAltaf78/Lumina.git
 cd Lumina
 
-# Copy environment variables
-cp .env.example .env
-# Fill in your API keys in .env
+# Copy environment variables into the server folder
+cp .env.example server/.env
+# Fill in your API keys in server/.env
 
 # Install server dependencies
 cd server && npm install
