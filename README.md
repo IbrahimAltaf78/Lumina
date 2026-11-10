@@ -8,7 +8,7 @@
 
 <br/><br/>
 
-   ![Status](https://img.shields.io/badge/Status-Live-4ADE80?style=for-the-badge&logo=statuspage&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Live-4ADE80?style=for-the-badge&logo=statuspage&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-0.1.0-22D3EE?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-4ADE80?style=for-the-badge)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-F472B6?style=for-the-badge)
